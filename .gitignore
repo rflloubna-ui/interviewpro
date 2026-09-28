@@ -1,0 +1,17 @@
+# Secrets
+.env
+
+# Environnement virtuel
+env/
+venv/
+.venv/
+
+# Fichiers Python compilés
+__pycache__/
+*.pyc
+
+# Base de données locale (contient les comptes créés)
+db.sqlite3
+
+# Fichiers envoyés par les utilisateurs
+media/
