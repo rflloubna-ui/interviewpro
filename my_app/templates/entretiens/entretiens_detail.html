@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Détails{% endblock %}
+{% block content %}
+<h2>Entretien du {{ entretien.date }}</h2>
+<p><strong>Manager :</strong> {{ entretien.manager.username }}</p>
+<p><strong>Participant :</strong> {{ entretien.participant.username }}</p>
+<p><strong>Compte-rendu :</strong><br>{{ entretien.compte_rendu }}</p>
+<h3>Objectifs</h3>
+<ul>{% for obj in entretien.objectifs.all %}
+  <li>{{ obj.description }} ({{ obj.niveau_cible }}%)</li>
+{% endfor %}</ul>
+{% endblock %}

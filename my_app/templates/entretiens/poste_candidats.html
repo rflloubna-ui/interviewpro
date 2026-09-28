@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Candidats pour le poste{% endblock %}
+{% block content %}
+  {% if candidats %}
+    <h2>Candidats pour {{ candidats.0.poste.titre }}</h2>
+    <ul>
+      {% for cp in candidats %}
+        <li>{{ cp.candidat.username }} – {{ cp.status }}
+          <a class="btn btn-sm btn-success" href="{% url 'planifier_entretien' cp.id %}">Planifier</a>
+          <a class="btn btn-sm btn-danger" href="{% url 'candidature_delete' cp.id %}">Supprimer</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <h2>Aucun candidat pour ce poste</h2>
+    <p>Il n'y a actuellement aucun candidat pour ce poste.</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard Administrateur{% endblock %}
+{% block content %}
+  <h2>Dashboard Administrateur</h2>
+  <a class="btn btn-primary mb-3" href="{% url 'poste_list' %}">Gérer les postes</a>
+  <h4>Utilisateurs</h4>
+  <ul>
+    {% for u in users %}
+      <li>{{ u.username }} – {{ u.get_role_display }} – actif : {{ u.is_active }}</li>
+    {% endfor %}
+  </ul>
+  <h4>Entretiens</h4>
+  <ul>
+    {% for e in entretiens %}
+      <li>{{ e }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

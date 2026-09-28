@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard Participant{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="mb-4">Dashboard Participant</h2>
+            
+            <!-- Postes Disponibles -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4 class="mb-0">
+                        <i class="fas fa-briefcase"></i> Postes Disponibles 
+                        <span class="badge bg-primary">{{ postes.count }}</span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    {% if postes %}
+                        <div class="row">
+                            {% for p in postes %}
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div class="card h-100">
+                                        <div class="card-header">
+                                            <h6 class="card-title mb-0">{{ p.titre }}</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="card-text">
+                                                {% if p.description %}
+                                                    {{ p.description|truncatewords:15 }}
+                                                {% else %}
+                                                    <em>Aucune description disponible</em>
+                                                {% endif %}
+                                            </p>
+                                            <small class="text-muted">
+                                                Manager: {{ p.manager.get_full_name|default:p.manager.username }}
+                                            </small>
+                                        </div>
+                                        <div class="card-footer">
+                                            <a class="btn btn-primary btn-sm w-100" href="{% url 'postuler' p.id %}">
+                                                <i class="fas fa-paper-plane"></i> Postuler
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="text-center py-4">
+                            <i class="fas fa-briefcase fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">Aucun poste disponible</h5>
+                            <p class="text-muted">Il n'y a actuellement aucun poste ouvert aux candidatures.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Mes Candidatures -->
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">
+                        <i class="fas fa-file-alt"></i> Mes Candidatures
+                        <span class="badge bg-info">{{ mes_candidatures.count }}</span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    {% if mes_candidatures %}
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Poste</th>
+                                        <th>Manager</th>
+                                        <th>Statut</th>
+                                        <th>Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for cp in mes_candidatures %}
+                                        <tr>
+                                            <td>{{ cp.poste.titre }}</td>
+                                            <td>{{ cp.poste.manager.get_full_name|default:cp.poste.manager.username }}</td>
+                                            <td>
+                                                {% if cp.status == 'en cours de planification' %}
+                                                    <span class="badge bg-warning">{{ cp.get_status_display }}</span>
+                                                {% elif cp.status == 'planifié' %}
+                                                    <span class="badge bg-success">{{ cp.get_status_display }}</span>
+                                                {% elif cp.status == 'refusé' %}
+                                                    <span class="badge bg-danger">{{ cp.get_status_display }}</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>{{ cp.date_affectation|date:"d/m/Y" }}</td>
+                                            <td>
+                                                {% if cp.status == 'en cours de planification' %}
+                                                    <a class="btn btn-sm btn-danger" href="{% url 'candidature_delete' cp.id %}" 
+                                                       onclick="return confirm('Êtes-vous sûr de vouloir annuler cette candidature ?')">
+                                                        <i class="fas fa-times"></i> Annuler
+                                                    </a>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="text-center py-4">
+                            <i class="fas fa-file-alt fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">Aucune candidature</h5>
+                            <p class="text-muted">Vous n'avez pas encore postulé à un poste.</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

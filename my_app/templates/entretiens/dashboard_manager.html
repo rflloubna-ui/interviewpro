@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard Manager{% endblock %}
+{% block content %}
+  <h2>Dashboard Manager</h2>
+  <a class="btn btn-success mb-3" href="{% url 'poste_list' %}">Mes Postes</a>
+
+  <h4>Mes Candidatures</h4>
+  {% if messages %}
+    <ul class="messages">
+      {% for msg in messages %}
+        <li class="alert alert-{{ msg.tags }}">{{ msg }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <ul>
+    {% for cp in candidats %}
+      <li>
+        {{ cp.candidat.username }} – {{ cp.poste.titre }} – {{ cp.status }}
+        <a class="btn btn-sm btn-primary"
+           href="{% url 'planifier_entretien' cp.id %}">
+          Planifier
+        </a>
+        {% if cp.status == 'en cours de planification' %}
+          <a class="btn btn-sm btn-danger"
+             href="{% url 'candidature_refuser' cp.id %}"
+             onclick="return confirm('Refuser cette candidature ?');">
+            Refuser
+          </a>
+        {% endif %}
+      </li>
+    {% empty %}
+      <li>Aucun candidat pour le moment.</li>
+    {% endfor %}
+  </ul>
+
+  <h4>Entretiens Planifiés</h4>
+  <ul>
+    {% for e in entretiens %}
+      <li>
+        {{ e.date }} – {{ e.candidat_poste.candidat.username }}
+        <a class="btn btn-sm btn-warning"
+           href="{% url 'entretien_edit' e.id %}">
+          Modifier
+        </a>
+        <a class="btn btn-sm btn-danger"
+           href="{% url 'entretien_delete' e.id %}">
+          Supprimer
+        </a>
+      </li>
+    {% empty %}
+      <li>Aucun entretien planifié.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

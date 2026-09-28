@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Mes Entretiens{% endblock %}
+{% block content %}
+  <h2>
+    {% if user.role == 'manager' %}
+      Entretiens Manager
+    {% else %}
+      Mes Entretiens
+    {% endif %}
+  </h2>
+  <ul>
+    {% for e in entretiens %}
+      <li>
+        {{ e.date }} – Candidat : {{ e.candidat_poste.candidat.username }} – Poste : {{ e.candidat_poste.poste.titre }}
+        {% if user.role == 'manager' %}
+          <a class="btn btn-sm btn-warning" href="{% url 'entretien_edit' e.id %}">Modifier</a>
+          <a class="btn btn-sm btn-danger" href="{% url 'entretien_delete' e.id %}">Supprimer</a>
+        {% endif %}
+      </li>
+    {% empty %}
+      <li>Aucun entretien trouvé.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

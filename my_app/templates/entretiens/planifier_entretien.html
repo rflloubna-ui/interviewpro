@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Planifier Entretien{% endblock %}
+{% block content %}
+  <h2>Planifier un entretien</h2>
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li class="alert alert-{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+  <p>Manager : {{ request.user.username }}</p>
+  <p>Candidat : {{ cp.candidat.username }}</p>
+  <p>Poste : {{ cp.poste.titre }}</p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary">Programmer</button>
+  </form>
+{% endblock %}

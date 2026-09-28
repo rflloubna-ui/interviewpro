@@ -1,0 +1,599 @@
+/* =============================================================================
+   STYLES CSS3 AVANCÉS - INTERVIEWPRO
+   =============================================================================
+   Ce fichier contient tous les styles CSS3 modernes pour l'application InterViewPro
+   Utilise des techniques avancées : gradients, animations, glassmorphism, responsive design
+*/
+
+/* =============================================================================
+   BACKGROUND GRADIENT ANIMÉ - EFFET VISUEL PRINCIPAL
+   ============================================================================= */
+
+/* Corps de la page avec gradient animé en arrière-plan */
+body {
+  /* Gradient multicolore avec 4 couleurs */
+  background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
+  
+  /* Taille du gradient (plus grande que l'écran pour l'animation) */
+  background-size: 400% 400%;
+  
+  /* Animation continue du gradient */
+  animation: gradientBG 15s ease infinite;
+  
+  /* Police principale de l'application */
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
+  /* Couleur du texte */
+  color: #2c3e50;
+  
+  /* Suppression des marges par défaut */
+  margin: 0;
+  padding: 0;
+  
+  /* Hauteur minimale de la page */
+  min-height: 100vh;
+}
+
+/* Animation du gradient de fond */
+@keyframes gradientBG {
+  0%   { background-position: 0% 50%; }    /* Position initiale */
+  50%  { background-position: 100% 50%; }  /* Position intermédiaire */
+  100% { background-position: 0% 50%; }    /* Retour à la position initiale */
+}
+
+/* =============================================================================
+   NAVBAR GLASSMORPHISM - EFFET VERRE MODERNE
+   ============================================================================= */
+
+/* Barre de navigation avec effet glassmorphism */
+.navbar {
+  /* Fond semi-transparent avec couleur beige */
+  background: rgba(245,245,220,0.7) !important;
+  
+  /* Effet de flou d'arrière-plan (glassmorphism) */
+  backdrop-filter: blur(12px);
+  
+  /* Ombre portée pour la profondeur */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  
+  /* Coins arrondis en bas */
+  border-radius: 0 0 25px 25px;
+  
+  /* Animation d'apparition depuis le haut */
+  animation: fadeInDown 1s ease-in-out;
+  
+  /* Espacement en bas */
+  margin-bottom: 2rem;
+  
+  /* Bordure subtile */
+  border-bottom: 2px solid rgba(30,58,138,0.2);
+}
+
+/* Animation d'apparition de la navbar */
+@keyframes fadeInDown {
+  from { 
+    opacity: 0; 
+    transform: translateY(-30px);  /* Commence 30px plus haut */
+  }
+  to   { 
+    opacity: 1; 
+    transform: translateY(0);     /* Position finale */
+  }
+}
+
+/* =============================================================================
+   STYLING DU LOGO/BRAND - EFFET GRADIENT ANIMÉ
+   ============================================================================= */
+
+/* Logo de l'application avec effet gradient animé */
+.navbar-brand {
+  /* Police spéciale pour le logo */
+  font-family: 'Orbitron', monospace;
+  font-weight: 900;
+  font-size: 2.2rem;
+  
+  /* Couleur principale */
+  color: #1e3a8a !important;
+  
+  /* Ombre portée du texte */
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  
+  /* Espacement des lettres */
+  letter-spacing: 2px;
+  
+  /* Position relative pour les pseudo-éléments */
+  position: relative;
+  
+  /* Gradient animé pour le texte */
+  background: linear-gradient(45deg, #1e3a8a, #3b82f6, #8b5cf6);
+  background-size: 200% 200%;
+  
+  /* Application du gradient au texte (propriété expérimentale) */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  
+  /* Animation du gradient du texte */
+  animation: gradientText 3s ease-in-out infinite;
+  
+  /* Transition pour les effets de survol */
+  transition: all 0.3s ease;
+}
+
+/* Animation du gradient du texte */
+@keyframes gradientText {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Effet de survol du logo */
+.navbar-brand:hover {
+  transform: scale(1.05);  /* Agrandissement léger */
+  filter: drop-shadow(0 0 10px rgba(30, 58, 138, 0.5));  /* Ombre colorée */
+}
+/* =============================================================================
+   STYLING DES BOUTONS - EFFETS MODERNES ET INTERACTIFS
+   ============================================================================= */
+
+/* Style de base pour tous les boutons */
+.btn {
+  /* Police en gras */
+  font-weight: 600;
+  
+  /* Coins arrondis */
+  border-radius: 25px;
+  
+  /* Transition fluide pour tous les effets */
+  transition: all 0.3s ease;
+  
+  /* Espacement interne */
+  padding: 0.6rem 1.5rem;
+  
+  /* Suppression de la bordure par défaut */
+  border: none;
+  
+  /* Position relative pour les pseudo-éléments */
+  position: relative;
+  
+  /* Débordement masqué pour les effets */
+  overflow: hidden;
+  
+  /* Texte en majuscules */
+  text-transform: uppercase;
+  
+  /* Espacement des lettres */
+  letter-spacing: 0.5px;
+}
+
+/* Effet de brillance au survol */
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;  /* Commence hors de vue */
+  width: 100%;
+  height: 100%;
+  
+  /* Gradient de brillance */
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  
+  /* Animation de déplacement */
+  transition: left 0.5s;
+}
+
+/* Effet de survol des boutons */
+.btn:hover {
+  /* Mouvement vers le haut et agrandissement */
+  transform: translateY(-3px) scale(1.05);
+  
+  /* Ombre portée plus prononcée */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* Animation de la brillance au survol */
+.btn:hover::before {
+  left: 100%;  /* Se déplace de gauche à droite */
+}
+
+/* =============================================================================
+   COULEURS SPÉCIFIQUES DES BOUTONS
+   ============================================================================= */
+
+/* Bouton primaire (bleu) */
+.btn-primary {
+  background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+  border: none;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #1e40af, #2563eb);
+  color: white;
+}
+
+/* Bouton succès (vert) */
+.btn-success {
+  background: linear-gradient(135deg, #059669, #10b981);
+  border: none;
+  color: white;
+}
+
+.btn-success:hover {
+  background: linear-gradient(135deg, #047857, #059669);
+  color: white;
+}
+
+/* Bouton avertissement (orange) */
+.btn-warning {
+  background: linear-gradient(135deg, #d97706, #f59e0b);
+  border: none;
+  color: white;
+}
+
+.btn-warning:hover {
+  background: linear-gradient(135deg, #b45309, #d97706);
+  color: white;
+}
+
+/* Bouton danger (rouge) */
+.btn-danger {
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+  border: none;
+  color: white;
+}
+
+.btn-danger:hover {
+  background: linear-gradient(135deg, #b91c1c, #dc2626);
+  color: white;
+}
+
+/* Bouton petit */
+.btn-sm {
+  padding: 0.4rem 1rem;
+  font-size: 0.8rem;
+  border-radius: 20px;
+}
+
+/* 🔔 Messages / Alerts */
+.messages {
+  padding: 0;
+  margin-bottom: 1rem;
+}
+.messages .alert {
+  background: rgba(245,245,220,0.9);
+  border: none;
+  border-left: 5px solid;
+  padding: 1rem 1.5rem;
+  border-radius: 15px;
+  margin-bottom: 0.8rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
+}
+.messages .alert::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  transition: left 0.5s;
+}
+.messages .alert:hover::before {
+  left: 100%;
+}
+.alert-success { 
+  border-color: #059669; 
+  background: linear-gradient(135deg, rgba(245,245,220,0.9), rgba(16,185,129,0.1));
+}
+.alert-warning { 
+  border-color: #d97706; 
+  background: linear-gradient(135deg, rgba(245,245,220,0.9), rgba(245,158,11,0.1));
+}
+.alert-error, .alert-danger { 
+  border-color: #dc2626; 
+  background: linear-gradient(135deg, rgba(245,245,220,0.9), rgba(239,68,68,0.1));
+}
+
+/* 🦶 Footer léger */
+footer {
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 0.9rem;
+  color: rgba(245,245,220,0.8);
+  margin-top: 2rem;
+}
+
+/* 🚀 Section Hero Impressionnante */
+.hero-section {
+  background: rgba(245,245,220,0.85);
+  backdrop-filter: blur(20px);
+  border-radius: 30px;
+  padding: 4rem 3rem;
+  margin: 2rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid rgba(30, 58, 138, 0.3);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+  animation: heroFadeIn 1.5s ease-out;
+}
+
+@keyframes heroFadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(50px) scale(0.95); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0) scale(1); 
+  }
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, transparent, rgba(30, 58, 138, 0.1), transparent);
+  animation: rotate 10s linear infinite;
+  z-index: -1;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* 🎯 Titre Hero */
+.hero-title {
+  margin-bottom: 2rem;
+  line-height: 1.2;
+}
+
+.title-main {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 2.5rem;
+  color: #1e3a8a;
+  text-shadow: 2px 2px 8px rgba(255,255,255,0.8);
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+}
+
+.title-brand {
+  display: block;
+  font-family: 'Orbitron', monospace;
+  font-weight: 900;
+  font-size: 4.5rem;
+  background: linear-gradient(45deg, #1e3a8a, #3b82f6, #8b5cf6, #ec4899);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientBrand 4s ease-in-out infinite;
+  text-shadow: 0 0 30px rgba(30, 58, 138, 0.5);
+  letter-spacing: 3px;
+  position: relative;
+}
+
+@keyframes gradientBrand {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.title-brand::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #3b82f6, #8b5cf6, transparent);
+  border-radius: 2px;
+  animation: underlineGlow 2s ease-in-out infinite;
+}
+
+@keyframes underlineGlow {
+  0%, 100% { opacity: 0.5; transform: translateX(-50%) scaleX(0.8); }
+  50% { opacity: 1; transform: translateX(-50%) scaleX(1.2); }
+}
+
+/* 📝 Sous-titre Hero */
+.hero-subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: #2c3e50;
+  text-shadow: 1px 1px 4px rgba(255,255,255,0.8);
+  line-height: 1.6;
+  margin-bottom: 3rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  letter-spacing: 0.5px;
+}
+
+/* ✨ Features Hero */
+.hero-features {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.feature-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.5rem 2rem;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(30, 58, 138, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  transition: left 0.6s;
+}
+
+.feature-item:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  background: rgba(255,255,255,0.9);
+}
+
+.feature-item:hover::before {
+  left: 100%;
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+}
+
+.feature-text {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #1e3a8a;
+  text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
+  letter-spacing: 0.5px;
+}
+
+/* 🔘 Boutons Hero */
+.hero-buttons {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero-btn {
+  position: relative;
+  padding: 1.2rem 2.5rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-radius: 50px;
+  overflow: hidden;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  transition: all 0.4s ease;
+  border: 2px solid transparent;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.hero-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.6s;
+}
+
+.hero-btn:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+.hero-btn:hover::before {
+  left: 100%;
+}
+
+.btn-text {
+  position: relative;
+  z-index: 2;
+}
+
+.btn-icon {
+  position: relative;
+  z-index: 2;
+  font-size: 1.3rem;
+  transition: transform 0.3s ease;
+}
+
+.hero-btn:hover .btn-icon {
+  transform: translateX(5px);
+}
+
+/* =============================================================================
+   RESPONSIVE DESIGN - ADAPTATION MOBILE
+   ============================================================================= */
+
+/* Media queries pour les écrans mobiles et tablettes */
+@media (max-width: 768px) {
+  /* Adaptation du titre principal */
+  .title-main {
+    font-size: 2rem;  /* Réduction de la taille sur mobile */
+  }
+  
+  /* Adaptation du logo */
+  .title-brand {
+    font-size: 3rem;      /* Réduction de la taille */
+    letter-spacing: 2px;  /* Réduction de l'espacement */
+  }
+  
+  /* Adaptation du sous-titre */
+  .hero-subtitle {
+    font-size: 1.2rem;   /* Réduction de la taille */
+  }
+  
+  /* Adaptation des éléments de fonctionnalités */
+  .hero-features {
+    gap: 1.5rem;  /* Réduction de l'espacement */
+  }
+  
+  /* Adaptation des cartes de fonctionnalités */
+  .feature-item {
+    padding: 1rem 1.5rem;  /* Réduction du padding */
+  }
+  
+  /* Adaptation des boutons hero */
+  .hero-buttons {
+    flex-direction: column;  /* Passage en colonne */
+    align-items: center;     /* Centrage */
+    gap: 1rem;              /* Espacement réduit */
+  }
+  
+  /* Adaptation des boutons hero individuels */
+  .hero-btn {
+    width: 100%;           /* Largeur complète */
+    max-width: 300px;      /* Largeur maximale */
+    justify-content: center; /* Centrage du contenu */
+  }
+  
+  /* Adaptation du logo navbar */
+  .navbar-brand {
+    font-size: 1.8rem;  /* Réduction de la taille */
+  }
+}

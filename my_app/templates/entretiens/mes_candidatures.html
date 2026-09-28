@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Mes Candidatures</h2>
+    {% if candidatures %}
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>Poste</th>
+                    <th>Manager</th>
+                    <th>Date d'affectation</th>
+                    <th>Statut</th>
+                    <th>Entretiens</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for candidature in candidatures %}
+                    <tr>
+                        <td>{{ candidature.poste.titre }}</td>
+                        <td>{{ candidature.poste.manager.get_full_name }}</td>
+                        <td>{{ candidature.date_affectation|date:"d/m/Y" }}</td>
+                        <td>{{ candidature.get_status_display }}</td>
+                        <td>
+                            {% if candidature.entretiens.all %}
+                                <ul>
+                                    {% for entretien in candidature.entretiens.all %}
+                                        <li>
+                                            {{ entretien.date|date:"d/m/Y H:i" }}
+                                            {% if entretien.compte_rendu %}
+                                                — <em>Compte rendu disponible</em>
+                                            {% endif %}
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                Aucun
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Vous n'avez pas encore de candidatures enregistrées.</p>
+    {% endif %}
+</div>
+{% endblock %}

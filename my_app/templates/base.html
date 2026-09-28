@@ -1,0 +1,89 @@
+<!-- =============================================================================
+     TEMPLATE DE BASE - INTERVIEWPRO
+     =============================================================================
+     Ce template sert de base pour toutes les pages de l'application
+     Il définit la structure HTML5, les métadonnées, et la navigation
+     Utilise Django template tags et Bootstrap pour le responsive design
+-->
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <!-- Métadonnées HTML5 -->
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  <!-- Titre dynamique avec bloc Django -->
+  <title>{% block title %}InterViewPro{% endblock %}</title>
+  
+  <!-- Chargement des fichiers statiques Django -->
+  {% load static %}
+  
+  <!-- Feuille de style personnalisée -->
+  <link rel="stylesheet" href="{% static 'css/base.css' %}"/>
+  
+  <!-- Bootstrap CSS pour le responsive design -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+  
+  <!-- Google Fonts pour les polices modernes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600;700;800&family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- =============================================================================
+       NAVIGATION PRINCIPALE - NAVBAR RESPONSIVE
+       ============================================================================= -->
+  
+  <!-- Barre de navigation Bootstrap avec effet glassmorphism -->
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <!-- Logo/Brand de l'application -->
+    <a class="navbar-brand" href="{% url 'home' %}">InterViewPro</a>
+    
+    <!-- Bouton hamburger pour mobile -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarNav" aria-controls="navbarNav"
+            aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <!-- Menu de navigation collapsible -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <!-- Navigation conditionnelle selon l'état de connexion -->
+        {% if user.is_authenticated %}
+          <!-- Liens pour utilisateurs connectés -->
+          <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Accueil</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'entretien_list' %}">Entretiens</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Déconnexion</a></li>
+        {% else %}
+          <!-- Liens pour utilisateurs non connectés -->
+          <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Connexion</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Inscription</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+  
+  <!-- =============================================================================
+       CONTENU PRINCIPAL - CONTAINER RESPONSIVE
+       ============================================================================= -->
+  
+  <!-- Container principal avec effet glassmorphism -->
+  <div class="container mt-4">
+    <!-- Bloc de contenu spécifique à chaque page -->
+    {% block content %}{% endblock %}
+  </div>
+  
+  <!-- =============================================================================
+       SCRIPTS JAVASCRIPT - BOOTSTRAP ET JQUERY
+       ============================================================================= -->
+  
+  <!-- jQuery pour les interactions JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  
+  <!-- Bootstrap JavaScript pour les composants interactifs -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

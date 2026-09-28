@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Accueil – InterViewPro{% endblock %}
+{% block content %}
+  <div class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <span class="title-main">Bienvenue sur</span>
+        <span class="title-brand">InterViewPro</span>
+      </h1>
+      <p class="hero-subtitle">
+        Révolutionnez vos entretiens avec une plateforme intelligente qui transforme chaque évaluation en opportunité de croissance exceptionnelle.
+      </p>
+      <div class="hero-features">
+        <div class="feature-item">
+          <span class="feature-icon">🚀</span>
+          <span class="feature-text">Innovation Technologique</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">⚡</span>
+          <span class="feature-text">Efficacité Maximale</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">🎯</span>
+          <span class="feature-text">Précision Garantie</span>
+        </div>
+      </div>
+      {% if not user.is_authenticated %}
+        <div class="hero-buttons">
+          <a class="btn btn-primary btn-lg hero-btn" href="{% url 'login' %}">
+            <span class="btn-text">Se connecter</span>
+            <span class="btn-icon">→</span>
+          </a>
+          <a class="btn btn-secondary btn-lg hero-btn" href="{% url 'register' %}">
+            <span class="btn-text">Créer un compte</span>
+            <span class="btn-icon">✨</span>
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}
