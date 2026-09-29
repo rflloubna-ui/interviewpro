@@ -6,11 +6,11 @@ Application web développée pendant mon stage chez INOVA Services (juillet 2025
 
 L'application gère trois rôles, chacun avec son propre tableau de bord.
 
-**Administrateur.** Il a une vue d'ensemble des utilisateurs, des postes et des entretiens. Les comptes managers restent inactifs à l'inscription jusqu'à leur activation depuis l'interface d'administration Django.
+Administrateur. Il a une vue d'ensemble des utilisateurs, des postes et des entretiens. Les comptes managers restent inactifs à l'inscription jusqu'à leur activation depuis l'interface d'administration Django.
 
-**Manager.** Il crée, modifie et supprime des offres de poste, consulte les candidats de chaque poste, refuse une candidature ou planifie un entretien. Lors de la planification, le candidat reçoit automatiquement un e-mail de convocation. Le manager peut ensuite rédiger le compte rendu de l'entretien.
+Manager. Il crée, modifie et supprime des offres de poste, consulte les candidats de chaque poste, refuse une candidature ou planifie un entretien. Lors de la planification, le candidat reçoit automatiquement un e-mail de convocation. Le manager peut ensuite rédiger le compte rendu de l'entretien.
 
-**Participant (candidat).** Il consulte les postes ouverts, postule en un clic et suit l'état de ses candidatures : en cours de planification, planifié ou refusé.
+Participant (candidat). Il consulte les postes ouverts, postule en un clic et suit l'état de ses candidatures : en cours de planification, planifié ou refusé.
 
 ## Aperçu
 
@@ -41,31 +41,6 @@ Python, Django 5, SQLite, HTML et CSS (templates Django), envoi d'e-mails par SM
 `my_app/views.py` contient la logique de chaque page (connexion, tableaux de bord, postes, candidatures, entretiens).
 `my_app/templates/` contient les pages HTML.
 `my_app/signals.py` crée automatiquement la fiche détaillée d'un manager à son inscription.
-
-## Lancer le projet
-
-1. Cloner le dépôt et installer les dépendances :
-
-```bash
-git clone https://github.com/rflloubna-ui/interviewpro.git
-cd interviewpro
-pip install -r requirements.txt
-```
-
-2. Copier le fichier `.env.example` en `.env` et y mettre une clé secrète. Les identifiants e-mail sont optionnels : sans eux, les e-mails s'affichent dans la console.
-
-3. Créer la base de données et un compte administrateur :
-
-```bash
-python manage.py migrate
-python manage.py createsuperuser
-```
-
-4. Lancer le serveur, puis ouvrir http://127.0.0.1:8000 :
-
-```bash
-python manage.py runserver
-```
 
 ## Auteure
 
